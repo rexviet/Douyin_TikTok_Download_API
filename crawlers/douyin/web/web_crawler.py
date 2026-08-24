@@ -58,6 +58,7 @@ from crawlers.douyin.web.utils import (AwemeIdFetcher,  # Aweme ID获取
                                        WebCastIdFetcher,  # 直播ID获取
                                        extract_valid_urls  # URL提取
                                        )
+from crawlers.douyin.web.cookie_provider import resolve_cookie_async
 
 # 配置文件路径
 path = os.path.abspath(os.path.dirname(__file__))
@@ -77,7 +78,7 @@ class DouyinWebCrawler:
                 "Accept-Language": douyin_config["headers"]["Accept-Language"],
                 "User-Agent": douyin_config["headers"]["User-Agent"],
                 "Referer": douyin_config["headers"]["Referer"],
-                "Cookie": douyin_config["headers"]["Cookie"],
+                "Cookie": await resolve_cookie_async(douyin_config["headers"]["Cookie"]),
             },
             "proxies": {"http://": douyin_config["proxies"]["http"], "https://": douyin_config["proxies"]["https"]},
         }
@@ -348,25 +349,13 @@ class DouyinWebCrawler:
         # 对于URL列表
         return await WebCastIdFetcher.get_all_webcast_id(urls)
 
-    async def update_cookie(self, cookie: str):
-        """
-        更新指定服务的Cookie
-        
-        Args:
-            service: 服务名称 (如: douyin_web)
-            cookie: 新的Cookie值
-        """
-        global config
-        service = "douyin"
-        print('DouyinWebCrawler before update', config["TokenManager"][service]["headers"]["Cookie"])
-        print('DouyinWebCrawler to update', cookie)
-        # 1. 更新内存中的配置（立即生效）
-        config["TokenManager"][service]["headers"]["Cookie"] = cookie
-        print('DouyinWebCrawler cookie updated', config["TokenManager"][service]["headers"]["Cookie"])
-        # 2. 写入配置文件（持久化）
-        config_path = f"{path}/config.yaml"
-        with open(config_path, 'w', encoding='utf-8') as file:
-            yaml.dump(config, file, default_flow_style=False, allow_unicode=True, indent=2)
+    # update_cookie() was deleted (F4): it wrote a caller-supplied cookie
+    # straight into the tracked config.yaml via yaml.dump(), and was
+    # reachable unauthenticated through POST /api/hybrid/update_cookie.
+    # We use a pull-model (Redis, see cookie_provider.py) for cookie
+    # rotation, so this method never had a legitimate caller. Deleting it
+    # is intentional and makes that upstream endpoint non-functional --
+    # see PATCH_NOTES.md item 3.
 
     async def main(self):
         """-------------------------------------------------------handler接口列表-------------------------------------------------------"""

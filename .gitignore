@@ -132,3 +132,6 @@ dmypy.json
 .idea
 /app/api/endpoints/download/
 /download/
+
+# Internal agent notes -- this fork is pushed to a public repo, never publish these.
+.claude/
