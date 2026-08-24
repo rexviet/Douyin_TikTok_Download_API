@@ -1,0 +1,68 @@
+tests/test_cookie_provider_timeouts.py
+  s_431e625055da30::t_ca092aef2b7f22 20-22,28-30
+  s_431e625055da30::t_b9fbbe3d941b41 1-19,23-27,31-68
+crawlers/douyin/web/config.yaml
+  s_431e625055da30::t_2dd2d86aae3925 11
+crawlers/douyin/web/cookie_provider.py
+  s_431e625055da30::t_15bcfe219db875 61
+  s_431e625055da30::t_454991b99b3720 36,50
+  s_431e625055da30::t_ebf16d3d6c3663 2,14-23
+  s_431e625055da30::t_982a234d6a522b 40-45,51
+  s_431e625055da30::t_70204108e3e38d 6,25-26,28,39,46-49,52-54,62,64,69-71,79-89,96,101-102,109-119
+  s_431e625055da30::t_ce96520750dd62 27
+  s_431e625055da30::t_1499b2aba8ff8c 103-108
+  s_431e625055da30::t_6a0b9d0bb78a0d 1,7-13
+  s_431e625055da30::t_442a69eb49ea40 3-5,24,29-35,37-38,55-56,72-73,95,97-100
+  s_431e625055da30::t_1da67b72c56f5b 57-60,63,65-68,74-78,90-94
+tests/test_cookie_provider.py
+  s_431e625055da30::t_e9ab55273a7b54 56-57,60-63
+  s_431e625055da30::t_bd68a5bccb0af6 1-11,16-19,24-25,36-48,51-54
+  s_431e625055da30::t_ca092aef2b7f22 13-15,21-23
+  s_431e625055da30::t_33cfdbf1f7b3d0 65-66,182,188,190,199,204-213,216
+  s_431e625055da30::t_538e64da3d2b15 241-245,268-274,278-281
+  s_431e625055da30::t_af8e98e355332a 12,20,26-35,49-50,55,58-59,64,67,88-128,130-135,138-168,170,172-179,181,183-187,189,194-196,201-202,217-226,228,230-231,234-235,238-240,246-267,275-277,282-289
+  s_431e625055da30::t_e82c178beef003 68-87,129,136-137,169,171,180,191-193,197-198,200,203,214-215,227,229,232-233,236-237,290-295
+tests/test_cookie_resolve_chain.py
+  s_431e625055da30::t_0d46d2285ae473 1-18,22-26,30-77
+  s_431e625055da30::t_ca092aef2b7f22 19-21,27-29
+tests/test_cookie_provider_async.py
+  s_431e625055da30::t_ca092aef2b7f22 18-20,26-28
+  s_431e625055da30::t_8dd7b1cbcf8e6e 1-17,21-25,29-70
+tests/test_cookie_provider_loop_safety.py
+  s_431e625055da30::t_4bc5469afeae77 1-73
+.gitignore
+  s_431e625055da30::t_4fce4d18e7ea5f 135-137
+tests/test_web_crawler_security.py
+  s_431e625055da30::t_de8b6a9292d7ee 1-19
+PATCH_NOTES.md
+  s_431e625055da30::t_e333bb641a62d2 1-6,9-21,48,78-80,82-83,98-104,131-143,149-155,157-168
+  s_431e625055da30::t_966bf90291fd21 7-8,22-47,81,84-97,105-130,144-148,156
+  s_431e625055da30::t_522d5a2fb26864 49-77
+requirements-dev.txt
+  s_431e625055da30::t_688159b1f25212 1-2
+tests/test_cookie_provider_warn_suppression.py
+  s_431e625055da30::t_48024db4cdae87 1-113
+requirements.txt
+  s_431e625055da30::t_69e2da8d052749 38
+  s_431e625055da30::t_804885323169f0 39
+crawlers/douyin/web/web_crawler.py
+  s_431e625055da30::t_8ea3d2abdf9ce2 61
+  s_431e625055da30::t_0018cb3f250a01 81
+  s_431e625055da30::t_2bafb4d8c8312c 352-358
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "5fe4e4d1357f01f30671b3b91f34e3433842cb58",
+  "prompts": {},
+  "sessions": {
+    "s_431e625055da30": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "516202aa-bec8-4519-8fdf-97b3c772a30a",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Viet Phung <vietphung@everfit.io>"
+    }
+  }
+}
