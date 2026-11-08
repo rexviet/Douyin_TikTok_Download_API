@@ -1,0 +1,25 @@
+tests/test_web_signature.py
+  s_c3c604cb551249::t_7224a354b65ef0 1-166
+crawlers/douyin/web/web_crawler.py
+  s_c3c604cb551249::t_cffa091aa874b7 62,109,129
+crawlers/douyin/web/web_signature.py
+  s_c3c604cb551249::t_cffa091aa874b7 1-92
+PATCH_NOTES.md
+  s_c3c604cb551249::t_c183e57dc87f5b 169-199
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "0e23a3a52f9526760776ddc4bb948788109687c1",
+  "prompts": {},
+  "sessions": {
+    "s_c3c604cb551249": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "53f0b5a2-3113-436b-84bd-baae6dcc220b",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Viet Phung <vietphung@everfit.io>"
+    }
+  }
+}
