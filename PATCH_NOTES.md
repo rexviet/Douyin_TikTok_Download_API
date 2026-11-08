@@ -166,3 +166,34 @@ grep -nE 'headers\["Cookie"\]|headers\.Cookie' crawlers/douyin/web/utils.py
 Any hit means the patch has gone half-applied and `utils.py` needs the same
 `cookie_provider` treatment. `check-patch-size.sh` runs this grep and fails on a
 hit.
+
+## 6. `web_signature.py` — Douyin's second signature on `aweme/detail` and `aweme/post`
+
+New file `crawlers/douyin/web/web_signature.py` (ours entirely), called from two
+lines in `web_crawler.py`: `fetch_one_video` and `fetch_user_post_videos` build
+their URL with `signed_endpoint(...)` instead of appending `a_bogus` by hand.
+
+**Why.** Since about October 2026 Douyin refuses those two endpoints without an
+`x-secsdk-web-signature` query parameter (plus `uifid`, `verifyFp`, `fp`,
+`timestamp`), even with a valid cookie and a valid `a_bogus`. The refusal is
+`403 Blocked by ArgusSecurityPlugin Uifid Not Found`, then `Signature Not Found`.
+This parser maps every failure to an information-free HTTP 400, so from outside it
+looks exactly like an expired cookie. `handler_user_profile` is not protected and
+keeps working, which is what makes the symptom misleading.
+
+**Source.** Algorithm and salt are from upstream v5
+(`dtk/signing/native/websign.py`, Apache-2.0), recovered from Douyin's own SDK.
+`tests/test_web_signature.py` pins four signatures computed by running that SDK in
+Node, so the salt and the preimage order are checked against an independent oracle.
+
+**When it goes stale.** If Douyin rotates the salt, or protects another path, the
+same 403 returns and the fix is in this file. The `uifid` is read from the
+`Cookie` header (`UIFID` / `UIFID_TEMP`), so the extension's cookie push must keep
+carrying it. A cookie without one gets the old, unsigned URL.
+
+**Upstream.** `upstream/main` is no longer this code: upstream rewrote the project
+as v5 from an empty tree on 2026-09-07 and `v4` is a frozen branch. `git pull
+upstream main` cannot merge into this fork; our base is `upstream/v4`
+(merge-base `42784ff`). `scripts/check-patch-size.sh` still diffs against
+`upstream/main` and will report meaningless numbers until it is pointed at
+`upstream/v4`.

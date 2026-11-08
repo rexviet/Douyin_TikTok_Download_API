@@ -59,6 +59,7 @@ from crawlers.douyin.web.utils import (AwemeIdFetcher,  # Aweme ID获取
                                        extract_valid_urls  # URL提取
                                        )
 from crawlers.douyin.web.cookie_provider import resolve_cookie_async
+from crawlers.douyin.web.web_signature import signed_endpoint
 
 # 配置文件路径
 path = os.path.abspath(os.path.dirname(__file__))
@@ -105,7 +106,7 @@ class DouyinWebCrawler:
             params_dict = params.dict()
             params_dict["msToken"] = ''
             a_bogus = BogusManager.ab_model_2_endpoint(params_dict, kwargs["headers"]["User-Agent"])
-            endpoint = f"{DouyinAPIEndpoints.POST_DETAIL}?{urlencode(params_dict)}&a_bogus={a_bogus}"
+            endpoint = signed_endpoint(DouyinAPIEndpoints.POST_DETAIL, params_dict, a_bogus, kwargs["headers"]["Cookie"])
 
             response = await crawler.fetch_get_json(endpoint)
         return response
@@ -125,7 +126,7 @@ class DouyinWebCrawler:
             params_dict = params.dict()
             params_dict["msToken"] = ''
             a_bogus = BogusManager.ab_model_2_endpoint(params_dict, kwargs["headers"]["User-Agent"])
-            endpoint = f"{DouyinAPIEndpoints.USER_POST}?{urlencode(params_dict)}&a_bogus={a_bogus}"
+            endpoint = signed_endpoint(DouyinAPIEndpoints.USER_POST, params_dict, a_bogus, kwargs["headers"]["Cookie"])
 
             response = await crawler.fetch_get_json(endpoint)
         return response
